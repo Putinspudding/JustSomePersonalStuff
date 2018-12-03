@@ -12,7 +12,7 @@ aqivalue = []
 filename = str(datetime.date.today())
 i=0
 while True:
-    while (time.localtime().tm_sec==0):
+    while (time.localtime().tm_min==0):
         hour = str(time.localtime().tm_hour)
         driver = webdriver.Chrome()
         driver.get("http://aqicn.org/city/nanjing/cn/")
@@ -33,3 +33,6 @@ while True:
         aqivalue.append(aqi)
         file = open("AQI/AQI"+filename+".txt", "a+")
         file.write(hour+","+aqi+"\n")
+        file.close()
+        time.sleep(60)
+
