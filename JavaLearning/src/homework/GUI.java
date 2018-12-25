@@ -16,7 +16,7 @@ public class GUI extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Button bt=new Button("确认");
-		Button btOpen= new Button("新窗口");
+		//Button btOpen= new Button("新窗口");
 		HandlerClass hanlder1=new HandlerClass();
 		bt.setOnAction(hanlder1);
 		pane.setAlignment(Pos.CENTER);
@@ -27,7 +27,7 @@ public class GUI extends Application{
 		pane.add(new Label("请输入圆的半径："),0,0);
 		pane.add(tf,1,0);
 		pane.add(bt,1,2);
-		pane.add(btOpen, 2, 2);
+		/*pane.add(btOpen, 2, 2);
 		btOpen.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent event){
 				Stage nextStage=new Stage();
@@ -56,7 +56,7 @@ public class GUI extends Application{
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	}
+	}*/
 	public static void main(String [] args)
 	{
 		launch(args);
