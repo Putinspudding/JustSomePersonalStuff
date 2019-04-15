@@ -1,4 +1,4 @@
-import random
+import copy
 resource = 150
 # process = {"Need": [70, 60, 60, 60], "Allocated": [25, 40, 45, 25]}
 need = [70, 60, 60, 60]
@@ -6,7 +6,6 @@ allocated = [25, 40, 45, 25]
 rest = []
 all_measure = []
 measure = []
-digit = 0
 
 
 
@@ -22,24 +21,24 @@ def judge_need(x, y):
             return 0
 
 
-def judge_rest(x, y):
-    y_backup = y
-    global digit
-    while digit < len(x):
-        while digit in measure:
-            digit = digit + 1
-        if x[digit] <= y:
-            measure.append(digit)
-            y = y + need[digit]
-            digit = 0
-            if len(measure) == len(x):
-                y = y_backup
-                all_measure.append(measure)
-                print(measure)
-                del measure[::]
-        else:
-            digit = digit + 1
-
+def judge_rest(x, y, z):
+    for i in range(0, len(x)):
+        if i in measure:
+            continue
+        if len(measure) == len(x):
+            #print(measure)
+            return
+        if x[i] <= y:
+            measure.append(i)
+            copyed_measure = copy.deepcopy(measure)
+            #print(measure)
+            if len(measure) == 4:
+                #print(measure)
+                z.append(copyed_measure)
+            y = y + need[i]
+            judge_rest(x, y, z)
+            measure.pop()
+            y = y - need[i]
 
 
 def rest_re(x):
@@ -52,6 +51,6 @@ def rest_re(x):
 need_min_all(rest)
 judge_need(need, resource)
 rest_resource = rest_re(allocated)
-judge_rest(rest, rest_resource)
+judge_rest(rest, rest_resource, all_measure)
 print(all_measure)
 
