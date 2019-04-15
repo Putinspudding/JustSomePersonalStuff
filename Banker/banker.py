@@ -1,7 +1,7 @@
 import copy
 resource = 150
-# process = {"Need": [70, 60, 60, 60], "Allocated": [25, 40, 45, 25]}
-need = [70, 60, 60, 60]
+# process = {"claim": [70, 60, 60, 60], "Allocated": [25, 40, 45, 25]}
+claim = [70, 60, 60, 60]
 allocated = [25, 40, 45, 25]
 rest = []
 all_measure = []
@@ -9,12 +9,12 @@ measure = []
 
 
 
-def need_min_all(x):
-    for i in range(0, len(need)):
-        x.append(need[i]-allocated[i])
+def claim_min_all(x):
+    for i in range(0, len(claim)):
+        x.append(claim[i]-allocated[i])
 
 
-def judge_need(x, y):
+def judge_claim(x, y):
     for i in x:
         if i > y:
             print("Not enough resource")
@@ -35,10 +35,10 @@ def judge_rest(x, y, z):
             if len(measure) == 4:
                 #print(measure)
                 z.append(copyed_measure)
-            y = y + need[i]
+            y = y + claim[i]
             judge_rest(x, y, z)
             measure.pop()
-            y = y - need[i]
+            y = y - claim[i]
 
 
 def rest_re(x):
@@ -48,8 +48,8 @@ def rest_re(x):
     return resource_temp
 
 
-need_min_all(rest)
-judge_need(need, resource)
+claim_min_all(rest)
+judge_claim(claim, resource)
 rest_resource = rest_re(allocated)
 judge_rest(rest, rest_resource, all_measure)
 print(all_measure)
