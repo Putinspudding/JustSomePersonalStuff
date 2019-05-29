@@ -58,7 +58,18 @@ def gradeRemove():
         studentManagement()
         return 0
 def gradeSearch():
-    pass
+    stu_name = input("请输入您要查询的学生姓名\n")
+    label = pd.read_csv("GradeInformation.csv", encoding='gbk')
+    if (label.index[label['姓名'] == stu_name]).size == 0:
+        input("您输入的学生姓名不存在！按回车返回上一页\n")
+        studentManagement()
+        return 0
+    else:
+        print((label.loc[label.index[label['姓名'] == stu_name]]).to_string(index=False))
+        input("按回车键返回上一页\n")
+        os.system('cls')
+        studentManagement()
+        return 0
 def quit():
     datastruction.menu()
 def studentManagement():

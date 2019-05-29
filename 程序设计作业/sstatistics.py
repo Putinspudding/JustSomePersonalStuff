@@ -1,17 +1,107 @@
 import datastruction
+import BasicMath
 import os
+import pandas as pd
+import numpy as np
 def AllAvg():
-    pass
+    label = pd.read_csv("GradeInformation.csv", encoding='gbk')
+    course_name = input("请输入课程名称\n")
+    try:
+        label[course_name]
+        # 判断课程是否存在
+    except KeyError:
+        print("您输入的课程不存在！请按回车确认后返回上一页！")
+        input()
+        os.system('cls')
+        studentStatistics()
+        return 0
+    finally:
+        course_list = (label[course_name].fillna("NULL")).to_list()
+        print(course_name+"的平均值为： "+str(BasicMath.Avg(course_list))+"\n")
+        input("按回车键返回上一页\n")
+        os.system('cls')
+        studentStatistics()
+        return 0
 def AllMax():
-    pass
+    label = pd.read_csv("GradeInformation.csv", encoding='gbk')
+    course_name = input("请输入课程名称\n")
+    try:
+        label[course_name]
+        # 判断课程是否存在
+    except KeyError:
+        print("您输入的课程不存在！请按回车确认后返回上一页！")
+        input()
+        os.system('cls')
+        studentStatistics()
+        return 0
+    finally:
+        course_list = label[course_name].to_list()
+        print(course_name + "的最大值为： " + str(BasicMath.Max(course_list)) + "\n")
+        input("按回车键返回上一页\n")
+        os.system('cls')
+        studentStatistics()
+        return 0
 def AllMin():
-    pass
+    label = pd.read_csv("GradeInformation.csv", encoding='gbk')
+    course_name = input("请输入课程名称\n")
+    try:
+        label[course_name]
+        # 判断课程是否存在
+    except KeyError:
+        print("您输入的课程不存在！请按回车确认后返回上一页！")
+        input()
+        os.system('cls')
+        studentStatistics()
+        return 0
+    finally:
+        course_list = label[course_name].to_list()
+        print(course_name + "的最小值为： " + str(BasicMath.Min(course_list)) + "\n")
+        input("按回车键返回上一页\n")
+        os.system('cls')
+        studentStatistics()
+        return 0
 def PerAvg():
-    pass
+    stu_name = input("请输入您要查询的学生姓名\n")
+    label = pd.read_csv("GradeInformation.csv", encoding='gbk')
+    if (label.index[label['姓名'] == stu_name]).size == 0:
+        input("您输入的学生姓名不存在！按回车返回上一页\n")
+        studentStatistics()
+        return 0
+    else:
+        dataset = np.delete((label.loc[label.index[label['姓名'] == stu_name]]).values[0], 0)
+        print(stu_name+"学生的平均成绩是： "+str(BasicMath.Avg(dataset))+"\n")
+        input("按回车键返回上一页\n")
+        os.system('cls')
+        studentStatistics()
+        return 0
 def PerMax():
-    pass
+    stu_name = input("请输入您要查询的学生姓名\n")
+    label = pd.read_csv("GradeInformation.csv", encoding='gbk')
+    if (label.index[label['姓名'] == stu_name]).size == 0:
+        input("您输入的学生姓名不存在！按回车返回上一页\n")
+        studentStatistics()
+        return 0
+    else:
+        dataset = np.delete((label.loc[label.index[label['姓名'] == stu_name]]).values[0], 0)
+        print(stu_name + "学生的最好成绩是： " + str(BasicMath.Max(dataset)) + "\n")
+        input("按回车键返回上一页\n")
+        os.system('cls')
+        studentStatistics()
+        return 0
 def PerMin():
-    pass
+    stu_name = input("请输入您要查询的学生姓名\n")
+    label = pd.read_csv("GradeInformation.csv", encoding='gbk')
+    if (label.index[label['姓名'] == stu_name]).size == 0:
+        input("您输入的学生姓名不存在！按回车返回上一页\n")
+        studentStatistics()
+        return 0
+    else:
+        dataset = np.delete((label.loc[label.index[label['姓名'] == stu_name]]).values[0], 0)
+        print(stu_name + "学生的最差成绩是： " + str(BasicMath.Min(dataset)) + "\n")
+        input("按回车键返回上一页\n")
+        os.system('cls')
+        studentStatistics()
+        return 0
 def quit():
     datastruction.menu()
 def studentStatistics():
@@ -39,6 +129,7 @@ def studentStatistics():
         input()
         os.system('cls')
         studentStatistics()
+        return 0
     try:
         os.system('cls')
         switch[static_number]()
@@ -47,3 +138,4 @@ def studentStatistics():
         input()
         os.system('cls')
         studentStatistics()
+        return 0

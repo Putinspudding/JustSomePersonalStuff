@@ -26,15 +26,16 @@ def judge_rest(x, y, z):
         if i in measure:
             continue
         if len(measure) == len(x):
-            #print(measure)
+            copyed_measure = copy.deepcopy(measure)
+            z.append(copyed_measure)
+            print(measure)
             return
         if x[i] <= y:
             measure.append(i)
-            copyed_measure = copy.deepcopy(measure)
-            #print(measure)
-            if len(measure) == 4:
+            print(measure)
+            #if len(measure) == len(x):
                 #print(measure)
-                z.append(copyed_measure)
+            #    z.append(copyed_measure)
             y = y + claim[i]
             judge_rest(x, y, z)
             measure.pop()
